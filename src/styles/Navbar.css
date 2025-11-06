@@ -1,0 +1,24 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* espace entre gauche et droite */
+  padding: 1rem;
+  background-color: #333;
+  color: white;
+}
+
+.logo {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.links-left a,
+.links-right a {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: white;
+}
+
+.links-right a:last-child {
+  margin-right: 0; /* pas de marge après le dernier lien */
+}
