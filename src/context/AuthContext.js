@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { signIn, logout as apiLogout, getCurrentUser, getAuthToken } from "../services/authService";
 
 const AuthContext = createContext(null);
 
@@ -6,35 +7,39 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   // État local pour stocker l'utilisateur (null = non connecté)
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (children === null) {
-    return null;
-  }
+  useEffect(() => {
+    const storedUser = getCurrentUser();
+    const storedToken = getAuthToken();
+    if (storedUser && storedToken) {
+      setUser(storedUser);
+      setToken(storedToken);
+    }
+    setLoading(false);
+  }, []);
+
   // ToDo : affecter la valeur nulle
   
   // 3. Fonction de connexion
-  const loginUser = (login, password) => {
-    // ToDo : implémenter une connexion avec une logique simplifiée : vérifie
-    if (login === "Andre" && password === "secret") {
-      setUser(login);
-      return true;
-    }
-    // si login/mot de passe correspondent à des valeurs prédéfinies
-    // Si le login vaut "Andre" et le mot de passe vaut "secret"
-    // alors renvoyer true et mettre à jour l'état avec le login de l'utilisateur connecté
-    // Si la connexion échoue, renvoyer false
-    return false;
+  const loginUser = async (login, password) => {
+    const data = await signIn(login, password);
+    setUser(data.visiteur);
+    setToken(data.access_token);
+    return data;
   };
 
   // 4. Fonction de déconnexion
   const logoutUser = () => {
-    // ToDo : réinitialiser la valeur de l'état à null
+    apiLogout();
     setUser(null);
+    setToken(null);
   };
 
   // 5. Valeurs exposées aux composants enfants
   return (
-    <AuthContext.Provider value={{ user, loginUser, logoutUser }}>
+    <AuthContext.Provider value={{ user, token, loading, loginUser, logoutUser }}>
       {children} {/* Rend les composants enfants (ex: App) */}
     </AuthContext.Provider>
   );
