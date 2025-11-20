@@ -1,7 +1,7 @@
 import { use, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import "../styles/Login.css";
 
 export default function Login(){
     const [login, setLogin] = useState("");
@@ -24,7 +24,7 @@ export default function Login(){
                 <h1>Connexion</h1>
             <form className="login-form" onSubmit={handleSubmit}>
                 <div>
-                    <label>Login :</label>
+                    <label>Login : </label>
                     <input
                         type="text"
                         value={login}
@@ -33,7 +33,7 @@ export default function Login(){
                     />
                 </div>
                 <div>
-                    <label>Mot de passe :</label>
+                    <label>Mot de passe : </label>
                     <input
                         type="password"
                         value={password}

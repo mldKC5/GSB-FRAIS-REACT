@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
     return null;
   }
   // ToDo : affecter la valeur nulle
-
+  
   // 3. Fonction de connexion
   const loginUser = (login, password) => {
     // ToDo : implémenter une connexion avec une logique simplifiée : vérifie
