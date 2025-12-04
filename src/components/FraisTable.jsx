@@ -99,7 +99,13 @@ function FraisTable() {
               <td>{f.id_visiteur}</td>
               <td>{f.nbjustificatifs}</td>
               <td>{f.datemodification}</td>
-              <td>{f.montantvalide !== null ? f.montantvalide + ' €' : "—"}</td>
+              <td>{ 
+                f.montantvalide !== null && f.montantvalide !== undefined
+                  ? f.montantvalide + ' €'
+                  : (f.montant !== null && f.montant !== undefined
+                      ? f.montant + ' €'
+                      : "—")
+              }</td>
             </tr>
           ))}
         </tbody>

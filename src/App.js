@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard'
 import Navbar from './components/Navbar';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import FraisAdd from './pages/FraisAdd';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Dashboard />
             </PrivateRoute>
           } />
+          <Route path="/frais/ajouter" element={<FraisAdd />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
