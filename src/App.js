@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import FraisAdd from './pages/FraisAdd';
+import FraisEdit from './pages/FraisEdit';
 
 function App() {
   return (
@@ -26,6 +27,11 @@ function App() {
             </PrivateRoute>
           } />
           <Route path="/frais/ajouter" element={<FraisAdd />} />
+          <Route path="/frais/modifier/:id" element={
+            <PrivateRoute>
+              <FraisEdit />
+            </PrivateRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

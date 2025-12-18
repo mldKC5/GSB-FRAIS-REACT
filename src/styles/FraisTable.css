@@ -34,3 +34,27 @@
   border-radius: 10px;
   font-size: 14px;  
 }
+
+.edit-button {
+  background-color: #ffc107;
+  margin-right: 5px;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.delete-button:hover {
+   background-color: #c82333; 
+}
