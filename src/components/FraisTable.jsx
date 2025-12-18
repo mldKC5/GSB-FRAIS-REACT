@@ -36,7 +36,7 @@ function FraisTable() {
     return <p>Chargement des frais…</p>;
   }
 
-  // Récupère le dernier frais ajouté (stocké dans le localStorage)
+
   let lastFraisAjoute = null;
   try {
     lastFraisAjoute = JSON.parse(localStorage.getItem('lastFraisAjoute'));

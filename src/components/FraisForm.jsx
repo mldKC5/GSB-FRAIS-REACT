@@ -15,11 +15,16 @@ function FraisForm({ frais = null }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Pré-remplir le formulaire si on modifie un frais existant
   useEffect(() => {
     if (frais) {
       setIdFrais(frais.id_frais);
-      setMontant(frais.montantvalide !== undefined && frais.montantvalide !== null ? String(frais.montantvalide) : "");
+      setMontant(
+        frais.montantvalide !== undefined && frais.montantvalide !== null && frais.montantvalide !== ""
+          ? String(frais.montantvalide)
+          : (frais.montant !== undefined && frais.montant !== null && frais.montant !== ""
+              ? String(frais.montant)
+              : "")
+      );
       setAnneeMois(frais.anneemois || "");
       setNbJustificatifs(frais.nbjustificatifs !== undefined && frais.nbjustificatifs !== null ? String(frais.nbjustificatifs) : "");
     }
@@ -34,24 +39,28 @@ function FraisForm({ frais = null }) {
       if (!token) throw new Error("Token non défini, veuillez vous connecter.");
       const user = getCurrentUser();
       if (!user) throw new Error("Utilisateur non défini, veuillez vous connecter.");
-      // Création de l'objet fraisData avec les attributs communs
-      const fraisData = {
-        anneemois: anneeMois,
-        nbjustificatifs: parseInt(nbJustificatifs, 10),
-      };
+      const idVisiteur = frais ? frais.id_visiteur : user.id_visiteur;
+      const montantValue = montant !== "" ? parseFloat(montant) : 0;
       if (frais) {
-        // Mise à jour d'un frais existant (UPDATE)
-        fraisData["id_frais"] = idFrais;
-        fraisData["montantvalide"] = parseFloat(montant);
-        // TODO : adapter l'URL selon la doc API, ici on tente /frais/modifier
-        const response = await axios.post(`${API_URL}frais/modifier`, fraisData, {
+        const params = new URLSearchParams({
+          id_frais: idFrais,
+          id_visiteur: idVisiteur,
+          anneemois: anneeMois,
+          nbjustificatifs: nbJustificatifs,
+          montantvalide: montantValue
+        }).toString();
+        const response = await axios.get(`${API_URL}frais/modifier?${params}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(response);
         navigate('/dashboard');
       } else {
-        // Ajout d'un nouveau frais (CREATE)
-        fraisData["id_visiteur"] = user["id_visiteur"];
+        const fraisData = {
+          id_visiteur: idVisiteur,
+          anneemois: anneeMois,
+          nbjustificatifs: parseInt(nbJustificatifs, 10),
+          montant: montantValue
+        };
         const response = await axios.post(`${API_URL}frais/ajout`, fraisData, {
           headers: { Authorization: `Bearer ${token}` },
         });
