@@ -11,6 +11,8 @@ function Navbar(){
                 <Link to="/">Accueil</Link>
                 {token && <Link to="/dashboard">Tableau de bord</Link>}
                 {token && <Link to="/frais/ajouter">Ajouter un frais</Link>}
+                {token && <Link to="/visiteur">Liste des visiteurs</Link>}
+
             </div>
             <div className="links-right">
                 {token ? (

@@ -12,6 +12,7 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import FraisAdd from './pages/FraisAdd';
 import FraisEdit from './pages/FraisEdit';
+import listVisiteurs from './pages/listVisiteur';
 
 function App() {
   return (
@@ -19,11 +20,16 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="/visiteur" element={
+            <PrivateRoute>
+              <listVisiteurs />
+            </PrivateRoute>
+          } />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={
             <PrivateRoute>
-              <Dashboard />
+              <Dashboard />  
             </PrivateRoute>
           } />
           <Route path="/frais/ajouter" element={<FraisAdd />} />

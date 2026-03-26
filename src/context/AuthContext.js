@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
   const loginUser = async (login, password) => {
     const data = await signIn(login, password);
     setUser(data.visiteur);
-    setToken(data.access_token);
+    setToken(data.token);
     return data;
   };
 

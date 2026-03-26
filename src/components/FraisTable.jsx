@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "../styles/FraisTable.css";
 
-const API_URL = 'http://gsb.julliand.etu.lmdsio.com/api/';
+const API_URL = 'http://localhost:8000/api/';
 
 function FraisTable() {
   const [fraisList, setFraisList] = useState([]);
