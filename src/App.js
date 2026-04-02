@@ -12,7 +12,8 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import FraisAdd from './pages/FraisAdd';
 import FraisEdit from './pages/FraisEdit';
-import listVisiteurs from './pages/listVisiteur';
+import ListVisiteur from './pages/listVisiteur';
+import Activite from './pages/Activite';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/visiteur" element={
             <PrivateRoute>
-              <listVisiteurs />
+              <ListVisiteur />
             </PrivateRoute>
           } />
           <Route path="/" element={<Home />} />
@@ -36,6 +37,11 @@ function App() {
           <Route path="/frais/modifier/:id" element={
             <PrivateRoute>
               <FraisEdit />
+            </PrivateRoute>
+          } />
+          <Route path="/activite/:id" element={
+            <PrivateRoute>
+              <Activite />
             </PrivateRoute>
           } />
         </Routes>
