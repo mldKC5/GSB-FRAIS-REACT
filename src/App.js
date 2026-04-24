@@ -14,6 +14,7 @@ import FraisAdd from './pages/FraisAdd';
 import FraisEdit from './pages/FraisEdit';
 import ListVisiteur from './pages/listVisiteur';
 import Activite from './pages/Activite';
+import Top10Visiteurs from './pages/Top10Visiteurs';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <ListVisiteur />
             </PrivateRoute>
           } />
+          <Route path="/top10" element={<Top10Visiteurs />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={
